@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#161326" />
+  <title>Furry Fandom — A Friendly Field Guide</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #161326;
+      --surface: #211d37;
+      --surface-light: #2b2646;
+      --text: #f8f5ff;
+      --muted: #c5bddb;
+      --pink: #ff8ecb;
+      --blue: #8ddcff;
+      --yellow: #ffe29a;
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 85% 5%, #493263 0, transparent 34rem),
+        var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    a { color: var(--blue); }
+
+    .wrap {
+      width: min(1100px, calc(100% - 2rem));
+      margin-inline: auto;
+    }
+
+    header {
+      padding: 1rem 0;
+      border-bottom: 1px solid #ffffff20;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      color: var(--text);
+      font-size: 1.2rem;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: .95rem;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover { color: var(--pink); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 3rem;
+      padding-block: 5rem;
+    }
+
+    .eyebrow {
+      color: var(--pink);
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { line-height: 1.15; }
+
+    h1 {
+      max-width: 12ch;
+      margin: .5rem 0 1rem;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      letter-spacing: -.055em;
+    }
+
+    h2 {
+      margin: 0 0 .75rem;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -.035em;
+    }
+
+    .lead {
+      max-width: 58ch;
+      color: var(--muted);
+      font-size: 1.12rem;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: .8rem 1.15rem;
+      border-radius: 999px;
+      background: var(--pink);
+      color: #24172d;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .hero-photo {
+      position: relative;
+      min-height: 350px;
+      overflow: hidden;
+      border: 1px solid #ffffff26;
+      border-radius: 32px;
+      background: var(--surface-light);
+      transform: rotate(1deg);
+    }
+
+    .hero-photo img, .card img, .wide-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-photo img { position: absolute; inset: 0; }
+
+    .photo-note {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      left: 1rem;
+      padding: .65rem .85rem;
+      border: 1px solid #ffffff30;
+      border-radius: 14px;
+      background: #161326df;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    section { padding-block: 3.5rem; }
+
+    .section-intro {
+      max-width: 65ch;
+      margin: 0 0 1.5rem;
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid #ffffff1c;
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .card img {
+      height: 210px;
+      background: var(--surface-light);
+    }
+
+    .card-body { padding: 1.2rem; }
+    .card h3 { margin: 0 0 .5rem; font-size: 1.3rem; }
+    .card p { margin: 0; color: var(--muted); }
+
+    .callout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 2rem;
+      border: 1px solid #ffffff1c;
+      border-radius: 28px;
+            background: linear-gradient(135deg, #322546, #211d37);
+    }
+
+    .callout p { color: var(--muted); }
+
+    .wide-photo {
+      height: 300px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: var(--surface-light);
+    }
+
+    .habits {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .habit {
+      padding: 1.25rem;
+      border: 1px solid #ffffff1c;
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .habit h3 { margin: 0 0 .4rem; }
+    .habit p { margin: 0; color: var(--muted); }
+
+    .note {
+      padding: 1rem 1.2rem;
+      border-left: 4px solid var(--yellow);
+      border-radius: 0 14px 14px 0;
+      background: #ffe29a12;
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 2rem;
+      padding: 2rem 0;
+      border-top: 1px solid #ffffff20;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    footer a { color: var(--muted); }
+
+    @media (max-width: 760px) {
+      .hero, .callout { grid-template-columns: 1fr; }
+      .hero { padding-block: 3rem; gap: 1.5rem; }
+      .hero-photo { min-height: 280px; }
+      .cards { grid-template-columns: 1fr; }
+      .card img { height: 240px; }
+      .habits { grid-template-columns: 1fr; }
+      .nav-links { gap: .65rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="brand" href="#">🐾 Furry Field Guide</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#styles">Styles</a>
+        <a href="#community">Community</a>
+        <a href="#behavior">Etiquette</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="about">
+      <div>
+        <div class="eyebrow">A friendly introduction</div>
+        <h1>Creativity with a little extra fluff.</h1>
+        <p class="lead">
+          The furry fandom is a community of people who enjoy fictional animal
+          characters with human traits. That interest can mean drawing, writing,
+          making costumes, role-playing, meeting friends—or simply enjoying
+          the art.
+        </p>
+        <a class="button" href="#styles">Explore the fandom ↓</a>
+      </div>
+
+      <div class="hero-photo">
+        <img
+          src="https://commons.wikimedia.org/wiki/Special:FilePath/Fursuit_Group_Photo-Furry_Migration.jpg"
+          alt="Fursuiters gathered for a group photo at a furry convention"
+          onerror="this.style.display='none'"
+        />
+        <div class="photo-note">
+          Fursuits are one part of the fandom—not something every furry wears.
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="styles">
+      <div class="eyebrow">Many ways to join in</div>
+      <h2>What kinds of furries are there?</h2>
+      <p class="section-intro">
+        There aren’t official “types” or a single way to be a furry. People
+        often describe themselves by the activities they enjoy or the characters
+        they create.
+      </p>
+
+      <div class="cards">
+        <article class="card">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Furry_group_photo.jpg"
+            alt="Furry fans in colorful animal costumes"
+            loading="lazy"
+            onerror="this.style.display='none'"
+          />
+          <div class="card-body">
+            <h3>Fursuiters</h3>
+            <p>
+              Fans who wear a custom animal-character costume called a
+              <em>fursuit</em>. Some wear a full suit; others choose a head,
+              paws, ears, or tail.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img
+            src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=1000&q=85"
+            alt="Cat sitting in a patch of sunlight"
+            loading="lazy"
+          />
+          <div class="card-body">
+            <h3>Artists &amp; makers</h3>
+                        <p>
+              People who draw characters, write stories, craft costumes,
+              sculpt, sew, animate, or build other creative projects.
+            </p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img
+            src="https://images.unsplash.com/photo-1484406566174-9da000fda645?auto=format&fit=crop&w=1000&q=85"
+            alt="Deer standing in a green forest"
+            loading="lazy"
+          />
+          <div class="card-body">
+            <h3>Character creators</h3>
+            <p>
+              Many fans invent a personal character, often called a
+              <em>fursona</em>. It might be a wolf, fox, deer, dragon, or
+              something entirely original.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="community">
+      <div class="callout">
+        <div>
+          <div class="eyebrow">A community, not a costume</div>
+          <h2>What brings people together?</h2>
+          <p>
+            Shared creativity and enthusiasm for anthropomorphic characters.
+            Furry fans connect online and at meetups or conventions, where
+            activities can include art shows, games, costume gatherings, and
+            charity events.
+          </p>
+          <p>
+            Some people are deeply involved; others just enjoy a few artworks
+            or characters. Both are perfectly fine.
+          </p>
+        </div>
+        <div class="wide-photo">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Sfo_meet_fursuit_group_photo.jpg"
+            alt="Fursuiters meeting and posing together"
+            loading="lazy"
+            onerror="this.style.display='none'"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="behavior">
+      <div class="eyebrow">How people behave</div>
+      <h2>People are people—be respectful.</h2>
+      <p class="section-intro">
+        There isn’t one personality or behavior shared by all furries. As in
+        any community, people have different interests and comfort levels.
+        Friendly basics go a long way:
+      </p>
+
+      <div class="habits">
+        <article class="habit">
+          <h3>Ask before hugging or touching</h3>
+          <p>
+            Fursuits can limit vision and be warm to wear. Always get consent
+            before touching someone or their costume.
+          </p>
+        </article>
+        <article class="habit">
+          <h3>Respect names and boundaries</h3>
+          <p>
+            Some fans use a character name or prefer not to be photographed.
+            A quick, polite question is best.
+          </p>
+        </article>
+        <article class="habit">
+          <h3>Remember the suit is a costume</h3>
+          <p>
+            A person in a fursuit is still a person. Don’t assume their
+            character tells you everything about them.
+          </p>
+        </article>
+        <article class="habit">
+          <h3>Enjoy the creativity</h3>
+          <p>
+            Share art kindly, credit creators, and let people enjoy the fandom
+            in their own way.
+          </p>
+        </article>
+      </div>
+
+      <p class="note" style="margin-top: 1rem;">
+        Quick myth-buster: being a furry usually means being a fan of
+        anthropomorphic animal characters. It doesn’t mean someone owns a
+        fursuit or behaves like an animal.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>
+        A welcoming little guide to a diverse fandom. Photo credits and
+        licensing details are available on
+        <a href="https://commons.wikimedia.org/wiki/Category:Fursuits"
+           target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
